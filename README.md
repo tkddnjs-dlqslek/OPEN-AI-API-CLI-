@@ -9,56 +9,35 @@
 - '실시간 경제 기사 데이터.xlsx' : crawling.py로 크롤링한 데이터를 엑셀 파일로 저장
 <br/><br/>
 
-- '주담대dataset.xlsx' : 미리 대분류를 지정해놓은 엑셀 파일 저장 / categories 슬라이드에 대분류 저장(금리상승, 금리하락, 금리유지 등)
+
+- `categorized.py` : 크롤링한 기사 데이터에 분류 기준 슬라이드를 categories 슬라이드에 대분류 저장(금리상승, 금리하락, 금리유지 등). 또한 기사 데이터에 칼럼을 추가하여 어떤 분야 관련한 기사인지 기입.
+- 'filtered_실시간_경제_기사_데이터.xlsx' : categorized.py로 전처리한 기사 데이터 
+<br/><br/>
+
+
 - `classify_article.py` : 로컬 환경 변수에서 OPEN AI API KEY를 가져오도록 했음, 자체적으로 API KEY를 넣으면 실행가능(gpt-4o-mini 모델이 가성비가 제일 좋아 선정)
 - 1) 기사에 가장 중요한 텍스트를 키워드로 추출하도록 키워드 추출 함수를 추가
   2) 기사의 본문 내용이 너무 빈약할 경우를 대비해서 본문 내용을 1000자까지 늘려 작성하도록 텍스트 증강 함수를 추가
   3) 기사의 제목/본문/키워드를 토대로 categories 대분류에 따라 분류함, [category1, reason1], [category2, reason2] => [분류, 분류 이유] 해당 형식으로 2개 추출되도록 조정했다. 처음 분류된게 잘못 분류될 수 있음을 고려
   4) 최빈 카테고리와 희귀 카테고리를 선정해 현재 시의성이 높고 낮은 주제를 각각 찾을 수도 있다.
  <br/><br/>
- 
-- `categorized.py` : 회귀 모델(XGBoost, LM) 학습 및 평가
 
----
-
-## 🚀 실행 방법
-
-1. 필요한 라이브러리 설치:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-2. 순서대로 실행:
-    ```bash
-    python 01_crawler.py
-    python 02_preprocess.py
-    python 03_modeling.py
-    python 04_visualize.py
-    ```
-
-3. 결과는 `output/` 폴더에 저장됩니다.
-
----
+## EX)
+<img width="1456" height="663" alt="image" src="https://github.com/user-attachments/assets/3dd585ce-6a27-4b66-91b3-85beac908647" />
+1) 키워드 출력
+2) 증강된 기사 출력
+3) 요약본은 바로 엑셀 파일에 저장
 
 ## 📦 사용된 기술
 
-- Python, Selenium, BeautifulSoup
-- Google Vision API, KLUE-RoBERTa
-- XGBoost, Scikit-learn
-- Tableau
+- Python, Selenium
+- OPENAI API
+- CLI(Command Line Interface)
 
 ---
 
-
-
-# 로컬 사용법
-1. AI 분석기능 사용하려면 OpenAI 에서 API키 발급받아서 app.js에 입력 (브라우저에 입력해서 쓰는건 유출 위험있으니 use at your own risk)
-2. Chrome 확장기능 페이지에서 개발자모드 켜기
-3. '압축해제된 확장프로그램 로드' 버튼 눌러서 app.js, manifest.json 들어있는 폴더 올리기 
-4. 유튜브 가서 사용
 <br/><br/><br/>
-
-![sample1](https://github.com/user-attachments/assets/ca68624e-6864-4d1f-85b2-094862855f5b)
-
-<br/><br/><br/>
+1) 라이브러리 이름 yaml 아니고 pyyaml임
+2) CLI라서 categorized.py는 terminal에서 실행해야됨 ex) python classify_article.py --indir "filtered_실시간_경제_기사_데이터.xlsx" --sheet_name "Sorted_Data" --categories "기사카테고리" --categories_sheet_name "categories"
+   
 라이선스: 없음
