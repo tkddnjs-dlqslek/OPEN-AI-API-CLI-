@@ -39,6 +39,6 @@
 <br/><br/><br/>
 1) 라이브러리 이름 yaml 아니고 pyyaml임
 2) CLI라서 categorized.py는 terminal에서 실행해야됨 ex) python classify_article.py --indir "filtered_실시간_경제_기사_데이터.xlsx" --sheet_name "Sorted_Data" --categories "기사카테고리" --categories_sheet_name "categories"
-3) output_augmented_data.xlsx로 결과 출력
+3) result_category.xlsx로 결과 출력
    
 라이선스: 없음
